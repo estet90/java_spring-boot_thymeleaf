@@ -1,0 +1,65 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<body>
+<div id="paginator">
+    <div class="col-md-12 text-center">
+        <div class='pagination pagination-centered'>
+
+            <ul class="pagination">
+                <li th:class="${paginator.first} ? 'disabled'">
+                    <span th:if="${paginator.first}">← First</span>
+                    <a th:if="${not paginator.first}" th:href="@{/stackexchangeApiClient/1}">← First</a>
+                </li>
+                <li th:class="${paginator.hasPrevious} ? '' : 'disabled'">
+                    <span th:if="${not paginator.hasPrevious}">«</span>
+                    <a th:if="${paginator.hasPrevious}" th:href="@{/stackexchangeApiClient/{pageNumber}(pageNumber = ${paginator.currentPage - 1})}">«</a>
+                </li>
+                <li th:each="number : ${numbers}">
+                    <span th:if="${paginator.currentPage == number}" th:text="${number}">1</span>
+                    <a th:if="${paginator.currentPage != number}" th:href="@{/stackexchangeApiClient/{pageNumber}(pageNumber = ${number})}"><span th:text="${number}">1</span></a>
+                </li>
+                <li th:class="${paginator.hasNext}? '' : 'disabled'">
+                    <span th:if="${not paginator.hasNext}">»</span>
+                    <a th:if="${paginator.hasNext}" th:href="@{/stackexchangeApiClient/{pageNumber}(pageNumber = ${paginator.currentPage + 1})}" title='Go to next page'>»</a>
+                </li>
+                <li th:class="${paginator.last} ? 'disabled' : ''">
+                    <span th:if="${paginator.last}">Last →</span>
+                    <a th:if="${not paginator.last}" th:href="@{/stackexchangeApiClient/{pageNumber}(pageNumber = ${paginator.lastPage})}" >Last →</a>
+                </li>
+            </ul>
+
+            <!--<ul class="pagination">-->
+                <!--<li th:class="${pager.currentIndex == 1}? 'disabled' : ''"><span-->
+                        <!--th:if='${pager.currentIndex == 1}'>First</span> <a-->
+                        <!--th:if='${pager.currentIndex != 1}' th:href="@{/products/page/1}">First</a>-->
+                <!--</li>-->
+                <!--<li th:class="${pager.currentIndex != 1}? '' : 'disabled'"><span-->
+                        <!--th:if='${pager.currentIndex == 1}'>«</span> <a-->
+                        <!--th:if='${pager.currentIndex != 1}'-->
+                        <!--th:href="@{|${pager.baseUrl}${pager.currentIndex - 1}|}"-->
+                        <!--title='Go to previous page'>«</a></li>-->
+
+                <!--<li th:each="item : ${#numbers.sequence(pager.beginIndex,pager.endIndex)}"-->
+                    <!--th:class="${item == pager.currentIndex ? 'active' : '' }"><span-->
+                        <!--th:if='${item == pager.currentIndex}' th:text='${item}'>1</span> <a-->
+                        <!--th:if='${item != pager.currentIndex}' th:href="@{|${pager.baseUrl}${item}|}">-->
+                    <!--<span th:text='${item}'>1</span>-->
+                <!--</a></li>-->
+
+                <!--<li th:class="${pager.currentIndex != pager.totalPageCount}? '' : 'disabled'">-->
+                    <!--<span th:if='${pager.currentIndex == pager.totalPageCount}'>»</span> <a-->
+                        <!--th:if='${pager.currentIndex != pager.totalPageCount}'-->
+                        <!--th:href="@{|${pager.baseUrl}${pager.currentIndex + 1}|}"-->
+                        <!--title='Go to next page'>»</a>-->
+                <!--</li>-->
+                <!--<li th:class="${pager.currentIndex == pager.totalPageCount}? 'disabled' : ''">-->
+                    <!--<span th:if='${pager.currentIndex == pager.totalPageCount}'>Last</span> <a-->
+                        <!--th:if='${pager.currentIndex != pager.totalPageCount}'-->
+                        <!--th:href="@{|${pager.baseUrl}${pager.totalPageCount}|}">Last</a>-->
+                <!--</li>-->
+            <!--</ul>-->
+        </div>
+    </div>
+</div>
+</body>
+</html>
