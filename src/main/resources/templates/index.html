@@ -28,14 +28,13 @@
 </script>
 
 <div style="margin: 10px auto; width: 500px;">
-    <img src="../static/images/logo.png" alt="logo" title="logo"
-         th:src="@{/images/logo.png}"/>
+    <img alt="logo" title="logo" th:src="@{/images/logo.png}"/>
 </div>
 <div class="outer">
     <div class="searchForm">
 
         <!--/*@thymesVar id="stackExchangeRequest" type="ru.pianotest.stackexchangeApiClient.entities.StackExchangeRequest"*/-->
-        <form action="#" th:action="@{/stackexchangeApiClient/search}"
+        <form action="#" th:action="@{/search}"
               th:object="${stackExchangeRequest}" method="get" >
             <ul th:if="${#fields.hasErrors('*') || javaErrors != null}" class="errorlist">
                 <li th:each="err : ${javaErrors != null ? javaErrors : #fields.errors('*')}" th:text="${err}">Input
@@ -129,7 +128,7 @@
     </div>
 
     <!--<div class="stackExchangeRequestItems">-->
-    <div class="stackExchangeRequestItems"
+    <div class="container"
          th:unless="${#arrays.isEmpty(items)}">
 
         <h2>Результаты поиска</h2>
@@ -153,39 +152,12 @@
                 <td><a th:text="${item.stackExchangeOwner.displayName}"
                        th:href="${item.stackExchangeOwner.link}">owner</a></td>
                 <td th:text="${item.answerCount}">1</td>
-                <td><img src="../static/images/tick.png" alt="logo" title="logo"
-                         th:src="${item.answered == true ? '/images/tick.png' : '/images/cross.png'}"/></td>
+                <td><img alt="img" title="img"
+                         th:src="${item.answered == true ? '/stackexchangeApiClient/images/tick.png' : '/stackexchangeApiClient/images/cross.png'}"/></td>
             </tr>
             </tbody>
         </table>
-        <div th:replace="fragments/paginator :: [id='paginator']"
-             th:remove="tag">Pagination Control</div>
-        <!--<div class="col-md-12 text-center">-->
-            <!--<div class="pagination pagination-centered">-->
-                <!--<ul class="pagination">-->
-                    <!--<li th:class="${paginator.first} ? 'disabled'">-->
-                    <!--<span th:if="${paginator.first}">← First</span>-->
-                    <!--<a th:if="${not paginator.first}" th:href="@{/stackexchangeApiClient/1}">← First</a>-->
-                    <!--</li>-->
-                    <!--<li th:class="${paginator.hasPrevious} ? '' : 'disabled'">-->
-                    <!--<span th:if="${not paginator.hasPrevious}">«</span>-->
-                    <!--<a th:if="${paginator.hasPrevious}" th:href="@{/stackexchangeApiClient/{pageNumber}(pageNumber = ${paginator.currentPage - 1})}">«</a>-->
-                    <!--</li>-->
-                    <!--<li th:each="number : ${numbers}">-->
-                    <!--<span th:if="${paginator.currentPage == number}" th:text="${number}">1</span>-->
-                    <!--<a th:if="${paginator.currentPage != number}" th:href="@{/stackexchangeApiClient/{pageNumber}(pageNumber = ${number})}"><span th:text="${number}">1</span></a>-->
-                    <!--</li>-->
-                    <!--<li th:class="${paginator.hasNext}? '' : 'disabled'">-->
-                    <!--<span th:if="${not paginator.hasNext}">»</span>-->
-                    <!--<a th:if="${paginator.hasNext}" th:href="@{/stackexchangeApiClient/{pageNumber}(pageNumber = ${paginator.currentPage + 1})}" title='Go to next page'>»</a>-->
-                    <!--</li>-->
-                    <!--<li th:class="${paginator.last} ? 'disabled' : ''">-->
-                    <!--<span th:if="${paginator.last}">Last →</span>-->
-                    <!--<a th:if="${not paginator.last}" th:href="@{/stackexchangeApiClient/{pageNumber}(pageNumber = ${paginator.lastPage})}" >Last →</a>-->
-                    <!--</li>-->
-                <!--</ul>-->
-            <!--</div>-->
-        <!--</div>-->
+        <div th:replace="fragments/paginator">paginator</div>
     </div>
 </div>
 </body>

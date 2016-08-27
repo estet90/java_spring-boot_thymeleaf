@@ -21,7 +21,7 @@ public class RestApiClientImpl implements RestApiClient{
 
     private static final Logger LOGGER = Logger.getLogger(RestApiClientImpl.class);
 
-    @Value("${url}")
+    @Value("${api.stackexchange.url}")
     private String url;
 
     private static Client client = Client.create();

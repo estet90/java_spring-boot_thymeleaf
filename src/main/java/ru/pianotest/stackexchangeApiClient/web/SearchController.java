@@ -19,7 +19,6 @@ import java.util.*;
  */
 
 @Controller
-@RequestMapping("/stackexchangeApiClient")
 public class SearchController {
 
     private final static Logger LOGGER = Logger.getLogger(SearchController.class);
@@ -27,13 +26,13 @@ public class SearchController {
     @Autowired
     private RestApiClient restApiClient;
 
-    private static Paginator<StackExchangeResponse> paginator = new Paginator<>();
+    private Paginator<StackExchangeResponse> paginator = new Paginator<>();
 
-    private static List<StackExchangeResponse> items = new ArrayList<>();
+    private List<StackExchangeResponse> items = new ArrayList<>();
 
-    private static List<Integer> numbers = new ArrayList<>();
+    private List<Integer> numbers = new ArrayList<>();
 
-    private static int countPages;
+    private int countPages;
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(StackExchangeRequest request) {
@@ -63,9 +62,13 @@ public class SearchController {
             items = restApiClient.search(searchTerms).getResponses();
             model.addAttribute("items", paginator.getListByPage(items, 1));
             countPages = paginator.getCountPages(items);
+            numbers.clear();
             for (int i = 1; i <= countPages; i++)
                 numbers.add(i);
+            LOGGER.info(new StringBuilder().append("количество страниц: ").append(numbers.size()));
+            LOGGER.info(new StringBuilder().append("количество строк: ").append(items.size()));
         } catch (Exception e) {
+            e.printStackTrace();
             LOGGER.error(e);
             model.addAttribute("javaErrors", e);
         }
@@ -74,7 +77,14 @@ public class SearchController {
 
     @RequestMapping(value = {"/{pageNumber}"}, method = RequestMethod.GET)
     public String getPage(@PathVariable("pageNumber") int pageNumber, StackExchangeRequest request, Model model){
+        if (pageNumber > countPages){
+            int currentPage = paginator.getCurrentPage();
+            LOGGER.info(new StringBuilder().append("страница №").append(pageNumber).append(" не существует, выполнен переход на страницу №").append(currentPage));
+            String redirect = new StringBuilder().append("redirect:/").append(currentPage).toString();
+            return redirect;
+        }
         model.addAttribute("items", paginator.getListByPage(items, pageNumber));
+        LOGGER.info(new StringBuilder().append("текущая страница: ").append(pageNumber));
         return "index";
     }
     

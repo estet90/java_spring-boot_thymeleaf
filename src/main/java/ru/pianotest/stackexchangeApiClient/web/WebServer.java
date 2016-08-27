@@ -1,20 +1,21 @@
 package ru.pianotest.stackexchangeApiClient.web;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.PropertySource;
 
 /**
- * Created by admin on 19.08.2016.
+ * Класс для запуска Jersey
  */
 @SpringBootApplication
 public class WebServer  {
 
     private static final Logger LOGGER = Logger.getLogger(WebServer.class);
 
+    private static final String CONTEXT_PATH = "/stackexchangeApiClient";
+
     public static void main (String[] args) {
+        System.setProperty("server.contextPath", CONTEXT_PATH);
         if (args.length == 1){
             try {
                 int port = Integer.parseInt(args[0]);
