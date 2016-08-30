@@ -152,8 +152,10 @@
                 <td><a th:text="${item.stackExchangeOwner.displayName}"
                        th:href="${item.stackExchangeOwner.link}">owner</a></td>
                 <td th:text="${item.answerCount}">1</td>
-                <td><img alt="img" title="img"
-                         th:src="${item.answered == true ? '/stackexchangeApiClient/images/tick.png' : '/stackexchangeApiClient/images/cross.png'}"/></td>
+                <td>
+                    <img th:if="${item.answered}" alt="img" title="img" th:src="@{/images/tick.png}"/>
+                    <img th:if="${not item.answered}" alt="img" title="img" th:src="@{/images/cross.png}"/>
+                </td>
             </tr>
             </tbody>
         </table>

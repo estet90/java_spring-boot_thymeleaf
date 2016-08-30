@@ -9,7 +9,7 @@ import java.util.List;
  */
 public class Paginator<T>{
 
-    private static int pageSize = 10;
+    private int pageSize = 10;
     private int currentPage;
     private int lastPage;
 

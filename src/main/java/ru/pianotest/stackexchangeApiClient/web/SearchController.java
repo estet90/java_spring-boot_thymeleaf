@@ -77,11 +77,16 @@ public class SearchController {
 
     @RequestMapping(value = {"/{pageNumber}"}, method = RequestMethod.GET)
     public String getPage(@PathVariable("pageNumber") int pageNumber, StackExchangeRequest request, Model model){
-        if (pageNumber > countPages){
+        StringBuilder redirect = new StringBuilder().append("redirect:/");
+        if (items.size() == 0){
+            LOGGER.error(new StringBuilder().append("поисковый запрос не выполнен или результрующий список пуст"));
+            return redirect.toString();
+        }
+        if (pageNumber > countPages || pageNumber < 1){
             int currentPage = paginator.getCurrentPage();
-            LOGGER.info(new StringBuilder().append("страница №").append(pageNumber).append(" не существует, выполнен переход на страницу №").append(currentPage));
-            String redirect = new StringBuilder().append("redirect:/").append(currentPage).toString();
-            return redirect;
+            LOGGER.error(new StringBuilder().append("страница №").append(pageNumber).append(" не существует, выполнен переход на страницу №").append(currentPage));
+            redirect = redirect.append(currentPage);
+            return redirect.toString();
         }
         model.addAttribute("items", paginator.getListByPage(items, pageNumber));
         LOGGER.info(new StringBuilder().append("текущая страница: ").append(pageNumber));
