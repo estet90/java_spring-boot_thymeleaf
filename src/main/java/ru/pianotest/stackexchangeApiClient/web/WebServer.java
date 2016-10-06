@@ -1,6 +1,7 @@
 package ru.pianotest.stackexchangeApiClient.web;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -10,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class WebServer  {
 
-    private static final Logger LOGGER = Logger.getLogger(WebServer.class);
+private static final Logger LOGGER = LogManager.getLogger(WebServer.class);
 
     private static final String CONTEXT_PATH = "/stackexchangeApiClient";
 

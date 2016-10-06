@@ -1,6 +1,8 @@
 package ru.pianotest.stackexchangeApiClient.web;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,8 +23,8 @@ import java.util.*;
 @Controller
 public class SearchController {
 
-    private final static Logger LOGGER = Logger.getLogger(SearchController.class);
-
+//    private final static Logger LOGGER = Logger.getLogger(SearchController.class);
+private static final Logger LOGGER = LogManager.getLogger(SearchController.class);
     @Autowired
     private RestApiClient restApiClient;
 
@@ -65,8 +67,8 @@ public class SearchController {
             numbers.clear();
             for (int i = 1; i <= countPages; i++)
                 numbers.add(i);
-            LOGGER.info(new StringBuilder().append("количество страниц: ").append(numbers.size()));
-            LOGGER.info(new StringBuilder().append("количество строк: ").append(items.size()));
+            LOGGER.info("количество страниц: {}", numbers.size());
+            LOGGER.info("количество строк: {}", items.size());
         } catch (Exception e) {
             e.printStackTrace();
             LOGGER.error(e);
@@ -79,17 +81,17 @@ public class SearchController {
     public String getPage(@PathVariable("pageNumber") int pageNumber, StackExchangeRequest request, Model model){
         StringBuilder redirect = new StringBuilder().append("redirect:/");
         if (items.size() == 0){
-            LOGGER.error(new StringBuilder().append("поисковый запрос не выполнен или результрующий список пуст"));
+            LOGGER.error("поисковый запрос не выполнен или результрующий список пуст");
             return redirect.toString();
         }
         if (pageNumber > countPages || pageNumber < 1){
             int currentPage = paginator.getCurrentPage();
-            LOGGER.error(new StringBuilder().append("страница №").append(pageNumber).append(" не существует, выполнен переход на страницу №").append(currentPage));
+            LOGGER.error("страница №{} не существует, выполнен переход на страницу №{}", pageNumber, currentPage);
             redirect = redirect.append(currentPage);
             return redirect.toString();
         }
         model.addAttribute("items", paginator.getListByPage(items, pageNumber));
-        LOGGER.info(new StringBuilder().append("текущая страница: ").append(pageNumber));
+        LOGGER.info("текущая страница: {}", pageNumber);
         return "index";
     }
     

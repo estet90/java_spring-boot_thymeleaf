@@ -4,7 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.*;
 import com.sun.jersey.api.client.filter.GZIPContentEncodingFilter;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -19,7 +20,7 @@ import java.util.Map;
 @PropertySource("classpath:config.properties")
 public class RestApiClientImpl implements RestApiClient{
 
-    private static final Logger LOGGER = Logger.getLogger(RestApiClientImpl.class);
+    private static final Logger LOGGER = LogManager.getLogger(RestApiClientImpl.class);
 
     @Value("${api.stackexchange.url}")
     private String url;
@@ -39,9 +40,9 @@ public class RestApiClientImpl implements RestApiClient{
                 webResource = webResource.queryParam(key, String.valueOf(searchParameters.get(key)));
         }
         StackExchangeResponseItems result;
-        LOGGER.info(webResource.getURI().toString());
+        LOGGER.info("выполнен поисковый запрос {}", webResource.getURI().toString());
         String json = webResource.get(String.class);
-        LOGGER.debug(json);
+        LOGGER.debug("полученный ответ {}" + json);
         result = mapper.readValue(json, StackExchangeResponseItems.class);
         return result;
     }
