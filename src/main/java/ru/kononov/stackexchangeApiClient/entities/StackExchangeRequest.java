@@ -1,4 +1,4 @@
-package ru.pianotest.stackexchangeApiClient.entities;
+package ru.kononov.stackexchangeApiClient.entities;
 
 import org.joda.time.DateTime;
 import org.springframework.format.annotation.DateTimeFormat;

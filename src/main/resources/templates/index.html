@@ -33,7 +33,7 @@
 <div class="outer">
     <div class="searchForm">
 
-        <!--/*@thymesVar id="stackExchangeRequest" type="ru.pianotest.stackexchangeApiClient.entities.StackExchangeRequest"*/-->
+        <!--/*@thymesVar id="stackExchangeRequest" type="ru.kononov.stackexchangeApiClient.entities.StackExchangeRequest"*/-->
         <form action="#" th:action="@{/search}"
               th:object="${stackExchangeRequest}" method="get" >
             <ul th:if="${#fields.hasErrors('*') || javaErrors != null}" class="errorlist">
@@ -70,7 +70,7 @@
                 <div class="searchParameter">
                     <label>order</label>
                     <select th:field="*{order}">
-                        <!--/*@thymesVar id="allOrders" type="ru.pianotest.stackexchangeApiClient.web.SearchController.allOrders"*/-->
+                        <!--/*@thymesVar id="allOrders" type="ru.kononov.stackexchangeApiClient.web.SearchController.allOrders"*/-->
                         <option th:each="order : ${allOrders}" th:value="${#strings.toUpperCase(order)}" th:text="${order}">order</option>
                     </select>
                 </div>
@@ -89,7 +89,7 @@
                 <div class="searchParameter">
                     <label>sort</label>
                     <select th:field="*{sort}">
-                        <!--/*@thymesVar id="allSorts" type="ru.pianotest.stackexchangeApiClient.web.SearchController.allSorts"*/-->
+                        <!--/*@thymesVar id="allSorts" type="ru.kononov.stackexchangeApiClient.web.SearchController.allSorts"*/-->
                         <option th:each="sort : ${allSorts}" th:value="${#strings.toUpperCase(sort)}" th:text="${sort}">sort</option>
                     </select>
                 </div>

@@ -1,4 +1,4 @@
-package ru.pianotest.stackexchangeApiClient.web;
+package ru.kononov.stackexchangeApiClient.web;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

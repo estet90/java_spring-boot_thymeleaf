@@ -1,4 +1,4 @@
-package ru.pianotest.stackexchangeApiClient.web;
+package ru.kononov.stackexchangeApiClient.web;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jersey.api.client.Client;
@@ -9,7 +9,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
-import ru.pianotest.stackexchangeApiClient.entities.StackExchangeResponseItems;
+import ru.kononov.stackexchangeApiClient.entities.StackExchangeResponseItems;
 
 import java.util.Map;
 

@@ -1,8 +1,7 @@
-package ru.pianotest.stackexchangeApiClient.web;
+package ru.kononov.stackexchangeApiClient.web;
 
-import ru.pianotest.stackexchangeApiClient.entities.StackExchangeResponseItems;
+import ru.kononov.stackexchangeApiClient.entities.StackExchangeResponseItems;
 
-import java.io.IOException;
 import java.util.Map;
 
 /**

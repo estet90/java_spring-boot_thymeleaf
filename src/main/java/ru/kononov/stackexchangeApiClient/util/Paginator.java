@@ -1,4 +1,4 @@
-package ru.pianotest.stackexchangeApiClient.util;
+package ru.kononov.stackexchangeApiClient.util;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +23,7 @@ public class Paginator<T>{
         this.currentPage = page;
         List<T> result = new ArrayList<T>();
         int lastItem = list.size() <= (page - 1) * pageSize + pageSize ? list.size() :(page - 1) * pageSize + pageSize;
-        lastPage = list.size() % pageSize == 0 ? list.size() / pageSize : 1 + (list.size() - list.size() % pageSize) / pageSize;
+        lastPage = getCountPages(list);
         for (int i = (page -1) * pageSize; i < lastItem; i++){
             result.add(list.get(i));
         }

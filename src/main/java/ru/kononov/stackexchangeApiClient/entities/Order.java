@@ -1,4 +1,4 @@
-package ru.pianotest.stackexchangeApiClient.entities;
+package ru.kononov.stackexchangeApiClient.entities;
 
 /**
  * Порядок вывода на экран

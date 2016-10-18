@@ -1,4 +1,4 @@
-package ru.pianotest.stackexchangeApiClient.web;
+package ru.kononov.stackexchangeApiClient.web;
 
 //import org.apache.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ru.pianotest.stackexchangeApiClient.entities.*;
-import ru.pianotest.stackexchangeApiClient.util.Paginator;
+import ru.kononov.stackexchangeApiClient.entities.Order;
+import ru.kononov.stackexchangeApiClient.entities.Sort;
+import ru.kononov.stackexchangeApiClient.entities.StackExchangeRequest;
+import ru.kononov.stackexchangeApiClient.entities.StackExchangeResponse;
+import ru.kononov.stackexchangeApiClient.util.Paginator;
 
 import java.util.*;
 
