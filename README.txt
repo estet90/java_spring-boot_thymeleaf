@@ -1,6 +1,6 @@
 1. Настройка
 Для проекта можно выставить уровень логирования, директорию логирования и URL для работы с REST API. 
-Конфигурационный файл для логирования \stackexchangeApiClient\src\main\resources\log4j.properies  
+Конфигурационный файл для логирования \stackexchangeApiClient\src\main\resources\log4j2.xml
 Конфигурационный файл для URL \stackexchangeApiClient\src\main\resources\config.properies
 
 2. Компиляция
